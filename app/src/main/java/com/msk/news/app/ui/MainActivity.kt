@@ -1,4 +1,4 @@
-package com.msk.news.ui
+package com.msk.news.app.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

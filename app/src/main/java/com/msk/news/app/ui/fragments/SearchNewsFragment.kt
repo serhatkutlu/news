@@ -1,4 +1,4 @@
-package com.msk.news.ui.fragments
+package com.msk.news.app.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
