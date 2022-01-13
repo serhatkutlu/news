@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Result(
     @PrimaryKey(autoGenerate = true)
     var id:Int?=null,
-    val content: Any,
+
     val creator: List<String>,
     val description: String,
     val full_description: String,
@@ -17,5 +17,6 @@ data class Result(
     val pubDate: String,
     val source_id: String,
     val title: String,
-    val video_url: Any
+    val video_url: String?=null,
+    val content: String?=null,
 )

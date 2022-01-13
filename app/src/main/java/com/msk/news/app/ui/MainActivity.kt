@@ -1,23 +1,30 @@
 package com.msk.news.app.ui
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.ViewModelProvider
+
 import com.msk.news.R
-import kotlinx.android.synthetic.main.activity_main.*
+
+import com.msk.news.app.db.articleDB
+import com.msk.news.app.repostory.NewsRepository
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var viewModel: ViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val repository= NewsRepository(articleDB.invoke(this))
+        val viewModelProviderFactory= NewsViewModelProviderFactory(repository)
 
+        viewModel= ViewModelProvider(this,viewModelProviderFactory).get(ViewModel::class.java)
 
     }
+
+
+
 
 }

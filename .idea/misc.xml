@@ -6,9 +6,11 @@
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/drawable/ic_all_news.xml" value="0.1" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/drawable/ic_breaking_news.xml" value="0.1" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
-        <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/activity_main.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/fragment_article.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/fragment_breaking_news.xml" value="0.264" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/fragment_saved_news.xml" value="0.11930091185410334" />
+        <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/fragment_search_news.xml" value="0.18206521739130435" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/layout/item_article_preview.xml" value="0.11930091185410334" />
         <entry key="..\:/Users/hjhtu/AndroidStudioProjects/news/app/src/main/res/menu/bottom_navigetion_menu.xml" value="0.4" />
       </map>
