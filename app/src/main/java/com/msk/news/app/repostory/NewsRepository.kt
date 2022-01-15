@@ -7,6 +7,6 @@ import retrofit2.Retrofit
 class NewsRepository(
     val db:articleDB
 ) {
-    suspend fun getBreakingNews(countrtCode:String,pageNunber:Int)=
-        retrofitInstance.api.getNews(countrtCode,pageNunber)
+    suspend fun getBreakingNews(countryCode:String,pagenunber:Int)=
+        retrofitInstance.api.getNews(pagenunber = pagenunber.toString())
 }

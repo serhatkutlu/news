@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.msk.news.app.data.Result
-import java.util.concurrent.locks.Lock
+import androidx.room.TypeConverters
+import com.msk.news.app.data.Article
 
 @Database(
-    entities =[Result::class],
+    entities =[Article::class],
     version = 1 )
+@TypeConverters(converter::class)
 abstract class articleDB:RoomDatabase() {
 
     abstract fun getArticleDao():ArticleDao

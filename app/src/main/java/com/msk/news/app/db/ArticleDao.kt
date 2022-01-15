@@ -1,23 +1,19 @@
 package com.msk.news.app.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.msk.news.app.data.Result
-import retrofit2.http.DELETE
+import androidx.room.*
+import com.msk.news.app.data.Article
 
 @Dao
 interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(article:Result):Long
+    suspend fun upsert(article:Article):Long
 
-    @Query("Select * From articles")
-    fun getAllArticles():LiveData<List<Result>>
+    @Query("Select * From Articles")
+    fun getAllArticles():LiveData<List<Article>>
 
-    @DELETE
-    suspend fun deleteArticle(article: Result)
+    @Delete
+    suspend fun deleteArticle(article:Article)
 
 
 }
