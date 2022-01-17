@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msk.news.R
 import com.msk.news.app.data.Article
-import kotlinx.android.synthetic.main.item_article_preview.view.*
+import kotlinx.android.synthetic.main.item_row.view.*
 
 
 class recyclerAdapter(): RecyclerView.Adapter<recyclerAdapter.ArticleHolder>() {
@@ -34,7 +34,7 @@ class recyclerAdapter(): RecyclerView.Adapter<recyclerAdapter.ArticleHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleHolder {
         val inflater=LayoutInflater.from(parent.context)
-        val view=inflater.inflate(R.layout.item_article_preview,parent,false)
+        val view=inflater.inflate(R.layout.item_row,parent,false)
         return ArticleHolder(view)
 
     }

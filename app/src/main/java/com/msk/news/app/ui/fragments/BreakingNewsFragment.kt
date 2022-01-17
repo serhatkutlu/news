@@ -72,10 +72,10 @@ class BreakingNewsFragment : Fragment() {
 
 private fun hideProgressBar(){
 
-    progressBar.visibility=View.INVISIBLE
+    breakingprogressBar.visibility=View.INVISIBLE
 }
     private fun showProgressBar(){
-    progressBar.visibility=View.INVISIBLE
+    breakingprogressBar.visibility=View.INVISIBLE
 }
     private fun setupRecyclerAdapter(){
         recycler_Adapter= recyclerAdapter()
