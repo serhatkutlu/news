@@ -1,12 +1,14 @@
 package com.msk.news.app.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.msk.news.R
 import com.msk.news.app.Util.Resource
@@ -37,6 +39,19 @@ lateinit var recycler_Adapter:recyclerAdapter
         super.onViewCreated(view, savedInstanceState)
         viewModel=(activity as MainActivity).viewModel
         setupRecyclerAdapter()
+
+
+        recycler_Adapter.SetOnItemClickListener {
+
+            val bundle=Bundle().apply {
+                putSerializable("article",it)
+            }
+            Log.d("sds","5")
+            findNavController().navigate(
+
+                R.id.action_searchNewsFragment_to_articleFragment2,bundle
+            )
+        }
         var job: Job?=null
         etSearch.addTextChangedListener{editible->
             job?.cancel()

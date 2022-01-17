@@ -1,5 +1,6 @@
 package com.msk.news.app.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,11 +49,13 @@ class recyclerAdapter(): RecyclerView.Adapter<recyclerAdapter.ArticleHolder>() {
             tvTitle.text=article.title
             tvDescription.text=article.description
             tvPublishedAt.text=article.publishedAt
-            setOnItemClickListener {
-                onItemClickListener?.let{
-                    (article)
+            setOnClickListener {
+                onItemClickListener?.let {
+                    Log.d("sds","adapter")
+                    it(article)
                 }
             }
+
         }
     }
 
@@ -63,7 +66,7 @@ class recyclerAdapter(): RecyclerView.Adapter<recyclerAdapter.ArticleHolder>() {
 
     private var onItemClickListener:((Article)->Unit)?=null
 
-    fun setOnItemClickListener(listener:(Article)->Unit){
+    fun SetOnItemClickListener(listener:(Article)->Unit){
         onItemClickListener=listener
 
     }

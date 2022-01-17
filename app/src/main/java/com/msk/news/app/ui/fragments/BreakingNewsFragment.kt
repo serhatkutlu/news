@@ -1,11 +1,13 @@
 package com.msk.news.app.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.msk.news.R
 import com.msk.news.app.Util.Resource
@@ -31,11 +33,18 @@ class BreakingNewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-
         setupRecyclerAdapter()
+
+        recycler_Adapter.SetOnItemClickListener{
+
+            val bundle=Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_breakingNewsFragment_to_articleFragment,bundle
+            )
+        }
+
         viewModel=(activity as MainActivity).viewModel
 
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {
@@ -83,11 +92,7 @@ private fun hideProgressBar(){
 
             this.adapter=recycler_Adapter
             this.layoutManager= LinearLayoutManager(activity)
-
-
         }
-
-
     }
 
 
