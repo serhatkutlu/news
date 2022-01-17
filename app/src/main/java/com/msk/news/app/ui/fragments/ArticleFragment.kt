@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.msk.news.R
 import com.msk.news.app.ui.MainActivity
 import com.msk.news.app.ui.ViewModel
@@ -36,8 +37,15 @@ val args:ArticleFragmentArgs by navArgs()
                 loadUrl(article.url)
 
         }
-
+        fab.setOnClickListener{
+            Log.d("sds","4")
+            viewModel.saveArticle(article)
+            Log.d("sds","5")
+            Snackbar.make(view,"Article saved succesfuly",Snackbar.LENGTH_SHORT)
+            Log.d("sds","6")
+        }
     }
+
 
 
 }

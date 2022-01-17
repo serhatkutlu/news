@@ -56,5 +56,11 @@ init {
         }
         return Resource.Error(response.message())
     }
-
+    fun saveArticle(article: Article)=viewModelScope.launch {
+        newsRepository.upsert(article)
+    }
+    fun getSavedNews()=newsRepository.getSavedNews()
+    fun deleteArticle(article: Article)=viewModelScope.launch {
+        newsRepository.deleteArticle(article)
+    }
 }
