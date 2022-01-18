@@ -16,9 +16,11 @@ class ViewModel(
     val newsRepository: NewsRepository
 ) :ViewModel(){
     val breakingNews:MutableLiveData<Resource<news_respons>> = MutableLiveData()
-    val breakingnewsPage=1
+    var breakingnewsPage=1
+    var breakingNewsResponce:news_respons?=null
     val searchNews:MutableLiveData<Resource<news_respons>> = MutableLiveData()
-    val searchnewsPage=1
+    var searchnewsPage=1
+    var searchNewsResponce:news_respons?=null
 init {
     getNews("us")
 
@@ -37,7 +39,15 @@ init {
     private fun handleBreakingNewsResponse(response:Response<news_respons>):Resource<news_respons>{
         if (response.isSuccessful){
             response.body()?.let {
-                return Resource.Succes(it)
+                breakingnewsPage++
+                if (breakingNewsResponce==null){
+                    breakingNewsResponce=it
+                }else{
+                    val oldArticles=breakingNewsResponce?.articles
+                    val newArticles=it.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Succes(breakingNewsResponce ?: it)
 
 
             }
@@ -48,8 +58,15 @@ init {
     private fun handleSearchNewsResponse(response:Response<news_respons>):Resource<news_respons>{
         if (response.isSuccessful){
             response.body()?.let {
-                println(it.articles)
-                return Resource.Succes(it)
+                searchnewsPage++
+                if (searchNewsResponce==null){
+                    searchNewsResponce=it
+                }else{
+                    val oldArticles=searchNewsResponce?.articles
+                    val newArticles=it.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Succes(searchNewsResponce ?: it)
 
 
             }

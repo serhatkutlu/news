@@ -34,7 +34,7 @@ val args:ArticleFragmentArgs by navArgs()
        webView.apply {
             webViewClient=WebViewClient()
 
-                loadUrl(article.url)
+                loadUrl(article.url!!)
 
         }
         fab.setOnClickListener{

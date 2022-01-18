@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.msk.news.R
+import com.msk.news.app.Util.Constants.Companion.QUERY_PAGE_SIZE
 import com.msk.news.app.Util.Resource
 import com.msk.news.app.adapter.recyclerAdapter
 import com.msk.news.app.ui.MainActivity
@@ -21,6 +25,9 @@ class BreakingNewsFragment : Fragment() {
 
     lateinit var viewModel: ViewModel
     lateinit var recycler_Adapter: recyclerAdapter
+    var isLoading=false
+    var isLastPage=false
+    var isScrolling=false
 
 
     override fun onCreateView(
@@ -50,11 +57,15 @@ class BreakingNewsFragment : Fragment() {
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {
             when(it){
                 is Resource.Succes->{
-                    println(it.data)
                     hideProgressBar()
                     it.data?.let {newsResponse ->
-                        println(newsResponse.articles)
-                        recycler_Adapter.differ.submitList(newsResponse.articles)
+                        recycler_Adapter.differ.submitList(newsResponse.articles.toList())
+                        val totalPages=newsResponse.totalResults/ QUERY_PAGE_SIZE +2
+                        isLastPage=viewModel.breakingnewsPage==totalPages
+                        if (isLastPage){
+                            Toast.makeText(view.context,"reset",Toast.LENGTH_LONG).show()
+                            rv_BreakingNews.setPadding(0,0,0,0)
+                        }
 
                     }
 
@@ -82,16 +93,51 @@ class BreakingNewsFragment : Fragment() {
 private fun hideProgressBar(){
 
     breakingprogressBar.visibility=View.INVISIBLE
+    isScrolling=false
 }
     private fun showProgressBar(){
     breakingprogressBar.visibility=View.INVISIBLE
+        isScrolling=true
 }
+val scrollListener= object :RecyclerView.OnScrollListener() {
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        super.onScrollStateChanged(recyclerView, newState)
+        if (newState==AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+            isScrolling=true
+        }
+    }
+
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        super.onScrolled(recyclerView, dx, dy)
+        var layoutManager=recyclerView.layoutManager as LinearLayoutManager
+        val firstVisibleItemPosition=layoutManager.findFirstVisibleItemPosition()
+        val visibleItemCount=layoutManager.childCount
+        val totalItemCount=layoutManager.itemCount
+
+        val isNotLoadingAndNotLastPage=!isLastPage&&!isLoading
+        val isAtLastItem=firstVisibleItemPosition+visibleItemCount>=totalItemCount
+        val isNotAtBeginning=firstVisibleItemPosition>=0
+        val isTotalMoreThanVisible=totalItemCount>=QUERY_PAGE_SIZE
+
+        val shouldPaginate=isNotLoadingAndNotLastPage && isAtLastItem
+                &&isNotAtBeginning&&isTotalMoreThanVisible
+        if (shouldPaginate){
+            viewModel.getNews("us")
+            isScrolling=false
+        }
+
+
+
+    }
+}
+
     private fun setupRecyclerAdapter(){
         recycler_Adapter= recyclerAdapter()
         rv_BreakingNews.apply {
 
             this.adapter=recycler_Adapter
             this.layoutManager= LinearLayoutManager(activity)
+            addOnScrollListener(this@BreakingNewsFragment.scrollListener)
         }
     }
 
