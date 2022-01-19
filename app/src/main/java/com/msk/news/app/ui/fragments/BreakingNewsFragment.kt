@@ -93,11 +93,11 @@ class BreakingNewsFragment : Fragment() {
 private fun hideProgressBar(){
 
     breakingprogressBar.visibility=View.INVISIBLE
-    isScrolling=false
+    isScrolling=true
 }
     private fun showProgressBar(){
     breakingprogressBar.visibility=View.INVISIBLE
-        isScrolling=true
+        isScrolling=false
 }
 val scrollListener= object :RecyclerView.OnScrollListener() {
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -109,6 +109,7 @@ val scrollListener= object :RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
+
         var layoutManager=recyclerView.layoutManager as LinearLayoutManager
         val firstVisibleItemPosition=layoutManager.findFirstVisibleItemPosition()
         val visibleItemCount=layoutManager.childCount
@@ -120,7 +121,7 @@ val scrollListener= object :RecyclerView.OnScrollListener() {
         val isTotalMoreThanVisible=totalItemCount>=QUERY_PAGE_SIZE
 
         val shouldPaginate=isNotLoadingAndNotLastPage && isAtLastItem
-                &&isNotAtBeginning&&isTotalMoreThanVisible
+                &&isNotAtBeginning&&isTotalMoreThanVisible&&isScrolling
         if (shouldPaginate){
             viewModel.getNews("us")
             isScrolling=false

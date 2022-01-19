@@ -8,14 +8,16 @@ import retrofit2.http.Query
 
 interface NewsApi {
 
-    @GET ("v2/top-headlines")
+    @GET ("v2/everything")
     suspend fun getNews(
         @Query("apiKey")
         api_key:String=API_KEy,
-        @Query("country")
+        @Query("q")
         countryCode:String="tr",
         @Query("page")
         pagenunber:String="1",
+        @Query("sortBy")
+        short_by:String="publishedAt"
     ):Response<news_respons>
 
 

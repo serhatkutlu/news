@@ -42,7 +42,7 @@ init {
 
 }
     fun getNews(countryCode:String)=viewModelScope.launch {
-        Log.d("sds","page:${searchnewsPage}")
+        Log.d("sds","page:${breakingnewsPage}")
         safeBreakingNewsCall(countryCode)
     }
     fun searchNews(searchQuery:String)=viewModelScope.launch {
