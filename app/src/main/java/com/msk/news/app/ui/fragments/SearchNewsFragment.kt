@@ -80,9 +80,9 @@ lateinit var recycler_Adapter:recyclerAdapter
                         recycler_Adapter.differ.submitList(newsResponse.articles.toList())
                         val totalPages=newsResponse.totalResults/ Constants.QUERY_PAGE_SIZE +2
                         isLastPage=viewModel.searchnewsPage==totalPages
-                        /*if (isLastPage){
+                        if (isLastPage){
                             rv_BreakingNews.setPadding(0,0,0,0)
-                        }*/
+                        }
                     }
 
                 }
