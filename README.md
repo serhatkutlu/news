@@ -1,6 +1,6 @@
  # NEWS
 
-application that lists news, made with Philipp Lackner lessons
+application that lists news, made with Philipp Lackner Lessons
 
 # SCREENSHOT
 
